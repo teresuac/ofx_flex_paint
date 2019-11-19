@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Condition="'$(WindowsTargetPlatformVersion)'==''">
+    <LatestTargetPlatformVersion>$([Microsoft.Build.Utilities.ToolLocationHelper]::GetLatestSDKTargetPlatformVersion('Windows', '10.0'))</LatestTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(WindowsTargetPlatformVersion)' == ''">$(LatestTargetPlatformVersion)</WindowsTargetPlatformVersion>
+    <TargetPlatformVersion>$(WindowsTargetPlatformVersion)</TargetPlatformVersion>
+  </PropertyGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{7FD42DF7-442E-479A-BA76-D0022F99702A}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>flex</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 9.2.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\libs\openFrameworksCompiled\project\vs\openFrameworksRelease.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\libs\openFrameworksCompiled\project\vs\openFrameworksRelease.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\libs\openFrameworksCompiled\project\vs\openFrameworksDebug.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\libs\openFrameworksCompiled\project\vs\openFrameworksDebug.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>bin\</OutDir>
+    <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)_debug</TargetName>
+    <LinkIncremental>true</LinkIncremental>
+    <GenerateManifest>true</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>bin\</OutDir>
+    <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
+    <TargetName>$(ProjectName)_debug</TargetName>
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>true</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>bin\</OutDir>
+    <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>bin\</OutDir>
+    <IntDir>obj\$(Platform)\$(Configuration)\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\..\..\addons\ofxFluid\src;..\..\..\addons\ofxFX\src;..\..\..\addons\ofxFX\src\composers;..\..\..\addons\ofxFX\src\filters;..\..\..\addons\ofxFX\src\generative;..\..\..\addons\ofxFX\src\operations;..\..\..\addons\FleX\include;..\..\..\addons\FleX;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.2\include</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <AdditionalDependencies>NvFlexReleaseCUDA_x86.lib;NvFlexExtReleaseCUDA_x86.lib;NvFlexDeviceDebug_x86.lib;NvFlexDeviceRelease_x86.lib;NvFlexDebugCUDA_x86.lib;NvFlexExtDebugCUDA_x86.lib;cuda.lib;cudart.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\addons\FleX\include\lib\win32;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.2\lib\Win32;$(CUDA_PATH_V9_2)\lib\x64;D:\OOF\of_v0.10.1_vs2017_release\addons\FleX\lib\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <PreprocessorDefinitions>WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\..\..\addons\ofxFluid\src;..\..\..\addons\ofxFX\src;..\..\..\addons\ofxFX\src\composers;..\..\..\addons\ofxFX\src\filters;..\..\..\addons\ofxFX\src\generative;..\..\..\addons\ofxFX\src\operations;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.2\include;..\..\..\addons\FleX\include;..\..\..\addons\FleX;$(CudaToolkitIncludeDir)</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\Houdini-NvFlex-master\FleX-master\FleX-master\lib;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.2\lib\Win32;D:\Houdini-NvFlex-master\FleX-master\FleX-master\lib\win32;$(CUDA_PATH_V9_2)\lib\win32;$(CudaToolkitLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\..\..\addons\ofxFluid\src;..\..\..\addons\ofxFX\src;..\..\..\addons\ofxFX\src\composers;..\..\..\addons\ofxFX\src\filters;..\..\..\addons\ofxFX\src\generative;..\..\..\addons\ofxFX\src\operations;..\..\..\addons\FleX\include;..\..\..\addons\FleX;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.2\include</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <Link>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <AdditionalDependencies>NvFlexReleaseCUDA_x86.lib;NvFlexExtReleaseCUDA_x86.lib;NvFlexDeviceDebug_x86.lib;NvFlexDeviceRelease_x86.lib;NvFlexDebugCUDA_x86.lib;NvFlexExtDebugCUDA_x86.lib;cuda.lib;cudart.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\..\addons\FleX\include\lib\win32;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.2\lib\Win32;$(CUDA_PATH_V9_2)\lib\x64;D:\OOF\of_v0.10.1_vs2017_release\addons\FleX\lib\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
+      <PreprocessorDefinitions>WIN32;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\..\..\addons\ofxFluid\src;..\..\..\addons\ofxFX\src;..\..\..\addons\ofxFX\src\composers;..\..\..\addons\ofxFX\src\filters;..\..\..\addons\ofxFX\src\generative;..\..\..\addons\ofxFX\src\operations;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.2\include;..\..\..\addons\FleX\include;..\..\..\addons\FleX;$(CudaToolkitIncludeDir)</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <Link>
+      <IgnoreAllDefaultLibraries>false</IgnoreAllDefaultLibraries>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <SubSystem>Console</SubSystem>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <RandomizedBaseAddress>false</RandomizedBaseAddress>
+      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:\Houdini-NvFlex-master\FleX-master\FleX-master\lib;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.2\lib\Win32;D:\Houdini-NvFlex-master\FleX-master\FleX-master\lib\win32;$(CUDA_PATH_V9_2)\lib\win32;$(CudaToolkitLibDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent />
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\nvflex_ofx.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\ofApp.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxFluid\src\ofxFluid.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxFX\src\ofxFXObject.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\addons\FleX\include\NvFlex.h" />
+    <ClInclude Include="..\..\..\addons\FleX\include\NvFlexDevice.h" />
+    <ClInclude Include="..\..\..\addons\FleX\include\NvFlexExt.h" />
+    <ClInclude Include="src\nvflex_ofx.h" />
+    <ClInclude Include="src\ofApp.h" />
+    <ClInclude Include="..\..\..\addons\ofxFluid\src\ofxFluid.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\composers\ofxBlend.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\composers\ofxClone.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\composers\ofxMask.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\composers\ofxMultiTexture.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\filters\ofxBarrelChromaAb.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\filters\ofxBloom.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\filters\ofxBlur.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\filters\ofxBokeh.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\filters\ofxChromaAb.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\filters\ofxChromaGlitch.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\filters\ofxContrast.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\filters\ofxGaussianBlur.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\filters\ofxGlow.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\filters\ofxGrayscale.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\filters\ofxInverse.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\filters\ofxLUT.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\filters\ofxMedian.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\filters\ofxOldTv.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\generative\ofxFBM.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\generative\ofxFire.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\generative\ofxGrayScott.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\generative\ofxNoise.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\generative\ofxTint.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\ofxFX.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\ofxFXObject.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\ofxSwapBuffer.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\operations\ofxAbsDiff.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\operations\ofxBounce.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\operations\ofxDisplacePixels.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\operations\ofxEdgeDetect.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\operations\ofxFlow.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\operations\ofxNormals.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\operations\ofxRipples.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\operations\ofxSubstract.h" />
+    <ClInclude Include="..\..\..\addons\ofxFX\src\operations\ofxThreshold.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
+      <Project>{5837595d-aca9-485c-8e76-729040ce4b0b}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="icon.rc">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">/D_DEBUG %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/D_DEBUG %(AdditionalOptions)</AdditionalOptions>
+      <AdditionalIncludeDirectories>$(OF_ROOT)\libs\openFrameworksCompiled\project\vs</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 9.2.targets" />
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="icon.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
