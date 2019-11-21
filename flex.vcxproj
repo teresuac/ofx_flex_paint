@@ -103,7 +103,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\..\..\addons\ofxFluid\src;..\..\..\addons\ofxFX\src;..\..\..\addons\ofxFX\src\composers;..\..\..\addons\ofxFX\src\filters;..\..\..\addons\ofxFX\src\generative;..\..\..\addons\ofxFX\src\operations;..\..\..\addons\FleX\include;..\..\..\addons\FleX;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.2\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\..\..\addons\ofxFluid\src;..\..\..\addons\ofxFX\src;..\..\..\addons\ofxFX\src\composers;..\..\..\addons\ofxFX\src\filters;..\..\..\addons\ofxFX\src\generative;..\..\..\addons\ofxFX\src\operations;..\..\..\addons\FleX\include;..\..\..\addons\FleX;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.2\include;..\..\..\addons\ofxGui\src;src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
@@ -143,7 +143,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\..\..\addons\ofxFluid\src;..\..\..\addons\ofxFX\src;..\..\..\addons\ofxFX\src\composers;..\..\..\addons\ofxFX\src\filters;..\..\..\addons\ofxFX\src\generative;..\..\..\addons\ofxFX\src\operations;..\..\..\addons\FleX\include;..\..\..\addons\FleX;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.2\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\..\..\addons\ofxFluid\src;..\..\..\addons\ofxFX\src;..\..\..\addons\ofxFX\src\composers;..\..\..\addons\ofxFX\src\filters;..\..\..\addons\ofxFX\src\generative;..\..\..\addons\ofxFX\src\operations;..\..\..\addons\FleX\include;..\..\..\addons\FleX;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.2\include;..\..\..\addons\ofxGui\src;src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ObjectFileName>$(IntDir)</ObjectFileName>
@@ -183,6 +183,16 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxBaseGui.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxButton.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxColorPicker.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxGuiGroup.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxInputField.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxLabel.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxPanel.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxSlider.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxSliderGroup.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxGui\src\ofxToggle.cpp" />
     <ClCompile Include="src\nvflex_ofx.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
@@ -193,6 +203,17 @@
     <ClInclude Include="..\..\..\addons\FleX\include\NvFlex.h" />
     <ClInclude Include="..\..\..\addons\FleX\include\NvFlexDevice.h" />
     <ClInclude Include="..\..\..\addons\FleX\include\NvFlexExt.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxBaseGui.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxButton.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxColorPicker.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxGui.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxGuiGroup.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxInputField.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxLabel.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxPanel.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxSlider.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxSliderGroup.h" />
+    <ClInclude Include="..\..\..\addons\ofxGui\src\ofxToggle.h" />
     <ClInclude Include="src\nvflex_ofx.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="..\..\..\addons\ofxFluid\src\ofxFluid.h" />
