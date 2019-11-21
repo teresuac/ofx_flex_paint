@@ -8,7 +8,7 @@ phases.resize(0);
 
 // buffers 
 SimBuffers::SimBuffers(NvFlexLibrary* l) :
-	positions(l),ids(1), restPositions(l), velocities(l), phases(l), densities(l),
+	positions(l),ids(1),cols(1), restPositions(l), velocities(l), phases(l), densities(l),
 	anisotropy1(l), anisotropy2(l), anisotropy3(l), normals(l), smoothPositions(l),
 	diffusePositions(l), diffuseVelocities(l), diffuseIndices(l), activeIndices(l),
 	shapeGeometry(l), shapePositions(l), shapeRotations(l), shapePrevPositions(l),
@@ -283,7 +283,6 @@ void ofx_nvflex::init_flex()
 
 	//ClearShapes();
 
-
 	maxParticles = 50000;
 
 	g_maxDiffuseParticles = 0;
@@ -297,12 +296,12 @@ void ofx_nvflex::init_flex()
 	g_solverDesc.maxContactsPerParticle = g_maxContactsPerParticle;
 
 	solver = NvFlexCreateSolver(library, &g_solverDesc);
-
+	
 
 }
 
 
-void  ofx_nvflex::emit_particles(float x, float y, float dirx, float diry, float odx, float ody, float rate) {
+void  ofx_nvflex::emit_particles(float x, float y, float dirx, float diry, float odx, float ody, float rate, Vec3 c) {
 
 	float invMass = 1 / 1.0 ;
 
@@ -318,6 +317,7 @@ void  ofx_nvflex::emit_particles(float x, float y, float dirx, float diry, float
 				buffers->velocities[i] = buffers->velocities[i + 1000];
 				buffers->phases[i] = buffers->phases[i + 1000];
 				buffers->ids[i] = buffers->ids[i+1000] ;
+				buffers->cols[i] = buffers->cols[i+1000];
 			}	 
 		}
 
@@ -326,6 +326,7 @@ void  ofx_nvflex::emit_particles(float x, float y, float dirx, float diry, float
 		buffers->phases.resize(num - 1000);
 		buffers->activeIndices.resize(num - 1000);
 		buffers->ids.resize(num - 1000);
+		buffers->cols.resize(num - 1000);
 		cursor -= 1000;
 	}
 	
@@ -336,13 +337,14 @@ void  ofx_nvflex::emit_particles(float x, float y, float dirx, float diry, float
 		srand(time(NULL) + i);
 		float mix = ((rand() + 2000) % 100)*0.01;
 
-		Vec3 position = Vec3(float(x + 0.05*(rand() % 100 - 50)), float(0), float(y + 0.05*((rand() + 10) % 100 - 50))) - ((Vec3(dirx, 0, diry))*mix * 1); // +RandomUnitVector() * 4;
+		Vec3 position = Vec3(float(x + 0.05*(rand() % 100 - 50)), float(0.5f), float(y + 0.05*((rand() + 10) % 100 - 50))) - ((Vec3(dirx, 0, diry))*mix * 1); // +RandomUnitVector() * 4;
 
 		Vec3 velocity = Vec3((dirx*(0.6) + odx * (0.4)) * 5 + 0.002*((rand() + 100) % 100 - 50), 0, (diry*(0.6) + ody * (0.4)) * 5 + 0.002*((rand() + 200) % 100 - 50))*(((rand() + 4000) % 100)*0.01); // +RandomUnitVector() * 4;;
 
 		if (cursor < maxParticles - 1) {
 				buffers->positions.push_back(Vec4(position.x, position.y, position.z, invMass));
 				buffers->ids.push_back( (rand() + 2000) % 1000);
+				buffers->cols.push_back(c);
 				buffers->velocities.push_back(velocity);
 				buffers->phases.push_back(phase);
 				buffers->activeIndices.push_back(cursor);
@@ -352,13 +354,13 @@ void  ofx_nvflex::emit_particles(float x, float y, float dirx, float diry, float
 	}
 };
 
-void ofx_nvflex::update(float x, float y, float dirx, float diry, float odx, float ody, float rate)
+void ofx_nvflex::update(float x, float y, float dirx, float diry, float odx, float ody, float rate, Vec3 c)
 {
 	activeParticles = NvFlexGetActiveCount(solver);
 
 	buffers->MapBuffers();
 
-	emit_particles(x, y,dirx,diry, odx, ody,rate);
+	emit_particles(x, y,dirx,diry, odx, ody,rate,c);
 
 	//render 
 }
@@ -422,7 +424,7 @@ void ofx_nvflex::set_params(float cohesion, float adhesion, float surfaceTension
 {
 	// sim params
 	g_params.gravity[0] = 0.0f;
-	g_params.gravity[1] = -9.8f;
+	g_params.gravity[1] = -59.8f;
 	g_params.gravity[2] = 0.0f;
 
 	g_params.wind[0] = 0.0f;
@@ -458,7 +460,7 @@ void ofx_nvflex::set_params(float cohesion, float adhesion, float surfaceTension
 	g_params.restitution = 0.001f;
 
 	g_params.maxSpeed = FLT_MAX;
-	g_params.maxAcceleration = 100.0f;	// approximately 10x gravity
+	g_params.maxAcceleration = 500.0f;	// approximately 10x gravity
 	
 
 	g_params.relaxationMode = eNvFlexRelaxationLocal;
@@ -476,9 +478,10 @@ void ofx_nvflex::set_params(float cohesion, float adhesion, float surfaceTension
  
 	g_params.diffuseLifetime = 2.0f;
 
-	g_params.numPlanes =1;
-	g_params.planes[0]  == Vec4(0.0f, 1.0f, 0.0f,-0.1f);
+	g_params.numPlanes = 1;
+	//(Vec4&)g_params.planes[0]  = Vec4(0.0f, -1.0f, 0.0f,3.0f);
+	(Vec4&)g_params.planes[0] = Vec4(0.0f, 1.0f, 0.0f, 0.0f);
 
-	//g_params.collisionDistance = 0.05f;
+ 	//g_params.collisionDistance = 0.05f;
 	//g_params.shapeCollisionMargin = 0.00001f;
 }

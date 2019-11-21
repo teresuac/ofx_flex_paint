@@ -5,6 +5,17 @@
 
 //--------------------------------------------------------------
 
+void ofApp::rand_color() {
+	srand(time(NULL));
+	col=ofColor(  (rand() % 500) *255.0/500.0,  ((rand()+5000) % 500) * 255.0/500.0,  ((rand()+2000) % 500)*255.0/500.0);
+ 
+}
+
+void ofApp::reset_cam() {
+	cam.setPosition(ofPoint(ofGetWidth() / 2, 700, ofGetHeight() / 2));
+	lookAt.setPosition(ofPoint(ofGetWidth() / 2, 0, ofGetHeight() / 2));
+	cam.lookAt(lookAt);
+}
 void ofApp::resetf() {
 	flex->init_flex();
 }
@@ -16,7 +27,7 @@ void ofApp::setup(){
 	ofSetVerticalSync(true);
 
 	//INIT VARIABLES
-	display_mode = false; 
+	display_mode = true; // 3D Mesh 
 
 	//Setup
 	flex = new ofx_nvflex();
@@ -30,19 +41,23 @@ void ofApp::setup(){
 	//listener 
 	reset.addListener(this, &ofApp::resetf);
 	display_mode_switch.addListener(this, &ofApp::dswitch);
+	
 
 	gui.setup(); // most of the time you don't need a name
-	gui.add(cohesion.setup("cohesion", .9, 0, 10));
-	gui.add(adhesion.setup("adhesion", .91, 0, 10));
-	gui.add(surfaceTension.setup("surfaceTension", 5, 0, 50));
-	gui.add(vorticityConfinement.setup("vorticityConfinement", 8, 0, 50));
-	gui.add(smoothing.setup("smoothing", 31, 0, 30));
-	gui.add(viscosity.setup("viscosity", .51, 0, 10));
-	gui.add(rate.setup("rate", 1.5, 0, 10));
-	gui.add(size.setup("size", 1.5, 0, 10));
+	gui.add(cohesion.setup("cohesion", .6, 0, 10));
+	gui.add(adhesion.setup("adhesion", .9, 0, 10));
+	gui.add(surfaceTension.setup("surfaceTension", 10, 0, 50));
+	gui.add(vorticityConfinement.setup("vorticityConfinement", 5, 0, 50));
+	gui.add(smoothing.setup("smoothing", 1, 0, 30));
+	gui.add(viscosity.setup("viscosity", .5, 0, 10));
+	gui.add(rate.setup("rate", 2, 0, 10));
+	gui.add(size.setup("size", 2, 0, 10));
 	gui.add(momentum.setup("momentum", .94, 0, 1));
+	gui.add(col.setup(ofColor(255, 255, 255, 255)));
 	gui.add(reset.setup("reset"));
-	gui.add(display_mode_switch.setup("display_3D"));
+	//gui.add(display_mode_switch.setup("display_3D"));
+	gui.add(shortcuta.setup(std::string("c : rand color")));
+	gui.add(shortcutb.setup(std::string("r : reset cam")));
 	bHide = false; 
 	// ------------------------------------------------------
 
@@ -62,16 +77,15 @@ void ofApp::setup(){
 	meshb.addVertex(ofVec3f(0, 0, 0));
 
 	//cam
-	cam.setOrientation(ofVec3f(-90, 0, 0));
-	cam.setPosition(512, 500, 368);
+	reset_cam();
+
 	Light.setup();
 	Light.setPosition(-200, 200,100);
-
+	rand_color();
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-
 
  
 }
@@ -86,13 +100,13 @@ void ofApp::draw(){
 		flex->dt = 1.0 / 25;  
 		float dx = mouseX - ofGetPreviousMouseX();
 		float dy = mouseY - ofGetPreviousMouseY();
-
-		flex->update(ofClamp(mouseX, 1, 1020), ofClamp(mouseY, 1, 760),dx,dy, olddx, olddx,rate);
+		ofColor cc = col;
+		flex->update(ofClamp(mouseX, 1, 1020), ofClamp(mouseY, 1, 760),dx,dy, olddx, olddx,rate,Vec3(cc.r,cc.g,cc.b));
 
 		olddx = dx;
 		olddy = dy;
 
-		 // MODE draw rectangle
+		// MODE draw rectangle
 		ofSetColor(0, 0, 0);
 		if (display_mode == true)
 		{
@@ -105,7 +119,7 @@ void ofApp::draw(){
 		for (int i = 0; i < flex->buffers->positions.size(); i++) {
 			float x = flex->buffers->positions[i].x;
 			float y = flex->buffers->positions[i].z;
-			flex->buffers->positions[i].y *= 0.06;
+			flex->buffers->positions[i].y *= 0.99;
 		
 			flex->buffers->velocities[i].x *= momentum;
 			flex->buffers->velocities[i].y *= momentum;
@@ -122,8 +136,9 @@ void ofApp::draw(){
 				ofVec3f pos(x, flex->buffers->positions[i].y , y);
 				mesh.addVertex(pos);
 			
-				float c = ( (flex->buffers->ids[i])%1000)*0.001;
-				mesh.addColor(ofFloatColor(c,c,c));
+				float c = ( (flex->buffers->ids[i])%1000)*0.001*0.5+0.5;
+				Vec3 cc = flex->buffers->cols[i];
+				mesh.addColor(ofColor(cc.x,cc.y,cc.z)*c);
 				 
 			}
 		}
@@ -132,15 +147,16 @@ void ofApp::draw(){
 		flex->updateb();
 	}
 
-
 	//mode 3D
+	if (ofGetElapsedTimef() < 4.0f)
+	{
+		reset_cam();
+	}
 	if (display_mode == true)
 	{
-		 cam.begin() ;
-		 meshb.draw();
-		 mesh.draw() ;
-
-
+		cam.begin() ;
+		meshb.draw();
+		mesh.draw() ;
 		cam.end()   ;
 	}
 
@@ -150,8 +166,15 @@ void ofApp::draw(){
 }
 
 //--------------------------------------------------------------
-void ofApp::keyPressed(int key){
-	
+void ofApp::keyPressed(int key) {
+	if (key == 'c')
+	{
+		rand_color();
+	}
+	else if (key == 'r')
+	{
+		reset_cam();
+	}
 }
 
 //--------------------------------------------------------------

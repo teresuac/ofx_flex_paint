@@ -16,6 +16,7 @@ struct SimBuffers
 {
 	NvFlexVector<Vec4> positions;
 	vector<int> ids;
+	vector<Vec3> cols;
 	NvFlexVector<Vec4> restPositions;
 	NvFlexVector<Vec3> velocities;
 	NvFlexVector<int> phases;
@@ -82,9 +83,9 @@ public :
 	~ofx_nvflex();
 
 	void init_flex();
-	void emit_particles(float x, float y, float dirx, float diry,float odx, float ody, float rate);
+	void emit_particles(float x, float y, float dirx, float diry,float odx, float ody, float rate, Vec3 c);
 
-	void update(float x, float y,float dirx, float diry, float odx, float ody,float rate);
+	void update(float x, float y,float dirx, float diry, float odx, float ody,float rate, Vec3 c);
 	void updateb();
 
 	void set_params(float cohesion, float adhesion, float surfaceTension, float vorticityConfinement, float smoothing, float viscosity, float size);
@@ -94,6 +95,7 @@ public :
 	NvFlexSolverDesc g_solverDesc;
 	SimBuffers*  buffers;
 	NvFlexParams g_params;
+	NvFlexCollisionGeometry geo; 
 
 	int maxParticles ;
 	int g_maxDiffuseParticles ;

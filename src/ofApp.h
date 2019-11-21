@@ -27,6 +27,8 @@ class ofApp : public ofBaseApp{
 		//callback
 		void resetf();
 		void dswitch();
+		void reset_cam();
+		void rand_color();
 
 		// nflex
 		ofx_nvflex* flex;
@@ -45,7 +47,10 @@ class ofApp : public ofBaseApp{
 		ofxFloatSlider rate;
 		ofxFloatSlider size;
 		ofxFloatSlider momentum ;
-		ofxButton reset;
+		ofxColorSlider col;
+		ofxLabel shortcuta; 
+		ofxLabel shortcutb;
+		ofxButton reset; 
 		ofxButton display_mode_switch;
 		bool bHide;
 		ofxPanel gui;
@@ -57,4 +62,7 @@ class ofApp : public ofBaseApp{
 		ofEasyCam cam;
 		ofLight Light;
 		//of3dGraphics a;
+
+		ofNode lookAt; 
 };
+
