@@ -8,7 +8,7 @@ phases.resize(0);
 
 // buffers 
 SimBuffers::SimBuffers(NvFlexLibrary* l) :
-	positions(l), restPositions(l), velocities(l), phases(l), densities(l),
+	positions(l),ids(1), restPositions(l), velocities(l), phases(l), densities(l),
 	anisotropy1(l), anisotropy2(l), anisotropy3(l), normals(l), smoothPositions(l),
 	diffusePositions(l), diffuseVelocities(l), diffuseIndices(l), activeIndices(l),
 	shapeGeometry(l), shapePositions(l), shapeRotations(l), shapePrevPositions(l),
@@ -182,8 +182,6 @@ void SimBuffers::InitBuffers() {
 	positions.resize(0);
 	velocities.resize(0);
 	phases.resize(0);
-	 
-
 	shapeGeometry.resize(0);
 	shapePositions.resize(0);
 	shapeRotations.resize(0);
@@ -213,13 +211,10 @@ ofx_nvflex::ofx_nvflex()
 	cursor = 0;
 
 
-
-
 }
 
 ofx_nvflex::~ofx_nvflex()
 {
-	 
 
 	if (solver)
 	{
@@ -282,7 +277,7 @@ void ofx_nvflex::init_flex()
 	 
 	 
 
-	set_params();
+//	set_params();
 
 	NvFlexSetSolverDescDefaults(&g_solverDesc);
 
@@ -307,7 +302,7 @@ void ofx_nvflex::init_flex()
 }
 
 
-void  ofx_nvflex::emit_particles(float x, float y, float dirx, float diry, float odx, float ody) {
+void  ofx_nvflex::emit_particles(float x, float y, float dirx, float diry, float odx, float ody, float rate) {
 
 	float invMass = 1 / 1.0 ;
 
@@ -322,18 +317,21 @@ void  ofx_nvflex::emit_particles(float x, float y, float dirx, float diry, float
 				buffers->positions[i] = buffers->positions[i + 1000];
 				buffers->velocities[i] = buffers->velocities[i + 1000];
 				buffers->phases[i] = buffers->phases[i + 1000];
-			}
-			 
+				buffers->ids[i] = buffers->ids[i+1000] ;
+			}	 
 		}
+
 		buffers->positions.resize(num - 1000);
 		buffers->velocities.resize(num - 1000);
 		buffers->phases.resize(num - 1000);
 		buffers->activeIndices.resize(num - 1000);
+		buffers->ids.resize(num - 1000);
 		cursor -= 1000;
 	}
 	
 	int phase =  NvFlexMakePhase(0, eNvFlexPhaseSelfCollide | eNvFlexPhaseFluid);
-	for (int i = 0; i < 500; i++)
+	int nump = 400 * rate; 
+	for (int i = 0; i < nump; i++)
 	{
 		srand(time(NULL) + i);
 		float mix = ((rand() + 2000) % 100)*0.01;
@@ -344,6 +342,7 @@ void  ofx_nvflex::emit_particles(float x, float y, float dirx, float diry, float
 
 		if (cursor < maxParticles - 1) {
 				buffers->positions.push_back(Vec4(position.x, position.y, position.z, invMass));
+				buffers->ids.push_back( (rand() + 2000) % 1000);
 				buffers->velocities.push_back(velocity);
 				buffers->phases.push_back(phase);
 				buffers->activeIndices.push_back(cursor);
@@ -353,13 +352,13 @@ void  ofx_nvflex::emit_particles(float x, float y, float dirx, float diry, float
 	}
 };
 
-void ofx_nvflex::update(float x, float y, float dirx, float diry, float odx, float ody)
+void ofx_nvflex::update(float x, float y, float dirx, float diry, float odx, float ody, float rate)
 {
 	activeParticles = NvFlexGetActiveCount(solver);
 
 	buffers->MapBuffers();
 
-	emit_particles(x, y,dirx,diry, odx, ody);
+	emit_particles(x, y,dirx,diry, odx, ody,rate);
 
 	//render 
 }
@@ -406,12 +405,10 @@ void ofx_nvflex::updateb( )
 			buffers->shapeFlags.size());
 	}
 
-	 set_params();
 	 NvFlexSetParams(solver, &g_params);
 	 NvFlexUpdateSolver(solver, 0.04, numSubsteps, profile);
 
 	if (buffers->positions.size()) {
-
 		copyDesc.elementCount = buffers->positions.size();
 		NvFlexGetParticles(solver, buffers->positions.buffer, &copyDesc);
 		NvFlexGetVelocities(solver, buffers->velocities.buffer, &copyDesc);
@@ -421,7 +418,7 @@ void ofx_nvflex::updateb( )
 }
 
 
-void ofx_nvflex::set_params()
+void ofx_nvflex::set_params(float cohesion, float adhesion, float surfaceTension, float vorticityConfinement, float smoothing, float viscosity, float size)
 {
 	// sim params
 	g_params.gravity[0] = 0.0f;
@@ -431,12 +428,12 @@ void ofx_nvflex::set_params()
 	g_params.wind[0] = 0.0f;
 	g_params.wind[1] = 0.0f;
 	g_params.wind[2] = 0.0f;
-
-	g_params.radius = 1.0f;
-	g_params.viscosity = 0.10f;
+ 
+	g_params.radius = size;
+	g_params.viscosity = viscosity;
 	g_params.dynamicFriction = 0.1f;
 	g_params.staticFriction = 0.0f;
-	g_params.particleFriction = 0.2f; // scale friction between particles by default
+	g_params.particleFriction = 0.2f;		// scale friction between particles by default
 	g_params.freeSurfaceDrag = 0.0f;
 	g_params.drag = 113.20f;
 	g_params.lift = 0.0f;
@@ -447,16 +444,15 @@ void ofx_nvflex::set_params()
 	g_params.anisotropyScale = 1.0f;
 	g_params.anisotropyMin = 0.1f;
 	g_params.anisotropyMax = 2.0f;
-	g_params.smoothing = 2.0f;
+	g_params.smoothing = smoothing;
 
 	g_params.dissipation = 0.0f;
 	g_params.damping = 0.0f;
 	g_params.particleCollisionMargin = 0.01f;
 	g_params.shapeCollisionMargin = 0.0f;
 	g_params.collisionDistance = 0.0f;
-	/*g_params.plasticThreshold = 0.0f;
-	g_params.plasticCreep = 0.0f;
-	g_params.fluid = true;*/
+	 
+ 
 	g_params.sleepThreshold = 0.0f;
 	g_params.shockPropagation = 0.0f;
 	g_params.restitution = 0.001f;
@@ -468,18 +464,16 @@ void ofx_nvflex::set_params()
 	g_params.relaxationMode = eNvFlexRelaxationLocal;
 	g_params.relaxationFactor = 1.0f;
 	g_params.solidPressure = 1.0f;
-	g_params.adhesion = 0.1f;
-	g_params.cohesion = 0.1f;
-	g_params.surfaceTension = 0.5f;
-	g_params.vorticityConfinement = 105.0f;
+	g_params.adhesion = adhesion;
+	g_params.cohesion = cohesion;
+	g_params.surfaceTension = surfaceTension;
+	g_params.vorticityConfinement = vorticityConfinement*150.0f;
 	g_params.buoyancy = 1.0f;
 	g_params.diffuseThreshold = 100.0f;
 	g_params.diffuseBuoyancy = 1.0f;
 	g_params.diffuseDrag = 0.8f;
 	g_params.diffuseBallistic = 16;
-	/*g_params.diffuseSortAxis[0] = 0.0f;
-	g_params.diffuseSortAxis[1] = 0.0f;
-	g_params.diffuseSortAxis[2] = 0.0f;*/
+ 
 	g_params.diffuseLifetime = 2.0f;
 
 	g_params.numPlanes =1;

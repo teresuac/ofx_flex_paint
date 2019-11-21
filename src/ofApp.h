@@ -2,8 +2,8 @@
 
 #include "ofMain.h" 
 #include "nvflex_ofx.h"
- 
-
+#include "ofxGui.h"
+#include "of3DGraphics.h"
 
 class ofApp : public ofBaseApp{
 
@@ -24,8 +24,37 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 
- 
+		//callback
+		void resetf();
+		void dswitch();
+
+		// nflex
 		ofx_nvflex* flex;
+
+		// mouse old
 		float olddx, olddy; 
 
+
+		// GUI
+		ofxFloatSlider cohesion;
+		ofxFloatSlider adhesion;
+		ofxFloatSlider surfaceTension;
+		ofxFloatSlider vorticityConfinement;
+		ofxFloatSlider smoothing;
+		ofxFloatSlider viscosity; 
+		ofxFloatSlider rate;
+		ofxFloatSlider size;
+		ofxFloatSlider momentum ;
+		ofxButton reset;
+		ofxButton display_mode_switch;
+		bool bHide;
+		ofxPanel gui;
+
+		// 3D mode
+		bool display_mode;
+		ofMesh mesh;
+		ofMesh meshb;
+		ofEasyCam cam;
+		ofLight Light;
+		//of3dGraphics a;
 };
