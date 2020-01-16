@@ -103,7 +103,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\..\..\addons\ofxFluid\src;..\..\..\addons\ofxFX\src;..\..\..\addons\ofxFX\src\composers;..\..\..\addons\ofxFX\src\filters;..\..\..\addons\ofxFX\src\generative;..\..\..\addons\ofxFX\src\operations;..\..\..\addons\FleX\include;..\..\..\addons\FleX;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.2\include;..\..\..\addons\ofxGui\src;src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\..\..\addons\ofxFluid\src;..\..\..\addons\ofxFX\src;..\..\..\addons\ofxFX\src\composers;..\..\..\addons\ofxFX\src\filters;..\..\..\addons\ofxFX\src\generative;..\..\..\addons\ofxFX\src\operations;..\..\..\addons\FleX\include;..\..\..\addons\FleX;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.2\include;..\..\..\addons\ofxGui\src;src;..\..\..\addons\FleX\core;..\..\..\addons\ofxRay-master\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
@@ -112,7 +112,7 @@
       <SubSystem>Console</SubSystem>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <AdditionalDependencies>NvFlexReleaseCUDA_x86.lib;NvFlexExtReleaseCUDA_x86.lib;NvFlexDeviceDebug_x86.lib;NvFlexDeviceRelease_x86.lib;NvFlexDebugCUDA_x86.lib;NvFlexExtDebugCUDA_x86.lib;cuda.lib;cudart.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\addons\FleX\include\lib\win32;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.2\lib\Win32;$(CUDA_PATH_V9_2)\lib\x64;D:\OOF\of_v0.10.1_vs2017_release\addons\FleX\lib\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\addons\FleX\include\lib\win32;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.2\lib\Win32;$(CUDA_PATH_V9_2)\lib\win32;D:\OOF\of_v0.10.1_vs2017_release\addons\FleX\lib\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent />
   </ItemDefinitionGroup>
@@ -143,7 +143,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\..\..\addons\ofxFluid\src;..\..\..\addons\ofxFX\src;..\..\..\addons\ofxFX\src\composers;..\..\..\addons\ofxFX\src\filters;..\..\..\addons\ofxFX\src\generative;..\..\..\addons\ofxFX\src\operations;..\..\..\addons\FleX\include;..\..\..\addons\FleX;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.2\include;..\..\..\addons\ofxGui\src;src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\..\..\addons\ofxFluid\src;..\..\..\addons\ofxFX\src;..\..\..\addons\ofxFX\src\composers;..\..\..\addons\ofxFX\src\filters;..\..\..\addons\ofxFX\src\generative;..\..\..\addons\ofxFX\src\operations;..\..\..\addons\FleX\include;..\..\..\addons\FleX;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.2\include;..\..\..\addons\ofxGui\src;src;..\..\..\addons\FleX\core;..\..\..\addons\ofxRay-master\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ObjectFileName>$(IntDir)</ObjectFileName>
@@ -156,7 +156,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <AdditionalDependencies>NvFlexReleaseCUDA_x86.lib;NvFlexExtReleaseCUDA_x86.lib;NvFlexDeviceDebug_x86.lib;NvFlexDeviceRelease_x86.lib;NvFlexDebugCUDA_x86.lib;NvFlexExtDebugCUDA_x86.lib;cuda.lib;cudart.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>..\..\..\addons\FleX\include\lib\win32;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.2\lib\Win32;$(CUDA_PATH_V9_2)\lib\x64;D:\OOF\of_v0.10.1_vs2017_release\addons\FleX\lib\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\..\addons\FleX\include\lib\win32;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v9.2\lib\Win32;$(CUDA_PATH_V9_2)\lib\win32;D:\OOF\of_v0.10.1_vs2017_release\addons\FleX\lib\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <PostBuildEvent />
   </ItemDefinitionGroup>
@@ -193,11 +193,17 @@
     <ClCompile Include="..\..\..\addons\ofxGui\src\ofxSlider.cpp" />
     <ClCompile Include="..\..\..\addons\ofxGui\src\ofxSliderGroup.cpp" />
     <ClCompile Include="..\..\..\addons\ofxGui\src\ofxToggle.cpp" />
-    <ClCompile Include="src\nvflex_ofx.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxRay-master\src\ofxRay\Base.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxRay-master\src\ofxRay\Camera.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxRay-master\src\ofxRay\Plane.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxRay-master\src\ofxRay\Plane_fitToPoints.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxRay-master\src\ofxRay\Projector.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxRay-master\src\ofxRay\Ray.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="..\..\..\addons\ofxFluid\src\ofxFluid.cpp" />
     <ClCompile Include="..\..\..\addons\ofxFX\src\ofxFXObject.cpp" />
+    <ClCompile Include="src\ofxNvFlex.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\addons\FleX\include\NvFlex.h" />
@@ -214,7 +220,12 @@
     <ClInclude Include="..\..\..\addons\ofxGui\src\ofxSlider.h" />
     <ClInclude Include="..\..\..\addons\ofxGui\src\ofxSliderGroup.h" />
     <ClInclude Include="..\..\..\addons\ofxGui\src\ofxToggle.h" />
-    <ClInclude Include="src\nvflex_ofx.h" />
+    <ClInclude Include="..\..\..\addons\ofxRay-master\src\ofxRay.h" />
+    <ClInclude Include="..\..\..\addons\ofxRay-master\src\ofxRay\Base.h" />
+    <ClInclude Include="..\..\..\addons\ofxRay-master\src\ofxRay\Camera.h" />
+    <ClInclude Include="..\..\..\addons\ofxRay-master\src\ofxRay\Plane.h" />
+    <ClInclude Include="..\..\..\addons\ofxRay-master\src\ofxRay\Projector.h" />
+    <ClInclude Include="..\..\..\addons\ofxRay-master\src\ofxRay\Ray.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="..\..\..\addons\ofxFluid\src\ofxFluid.h" />
     <ClInclude Include="..\..\..\addons\ofxFX\src\composers\ofxBlend.h" />
@@ -252,6 +263,9 @@
     <ClInclude Include="..\..\..\addons\ofxFX\src\operations\ofxRipples.h" />
     <ClInclude Include="..\..\..\addons\ofxFX\src\operations\ofxSubstract.h" />
     <ClInclude Include="..\..\..\addons\ofxFX\src\operations\ofxThreshold.h" />
+    <ClInclude Include="src\ofApp_util.h" />
+    <ClInclude Include="src\ofxNvFlex.h" />
+    <ClInclude Include="src\ofxNvFlex_data.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">

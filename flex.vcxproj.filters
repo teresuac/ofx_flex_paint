@@ -13,9 +13,6 @@
     <ClCompile Include="..\..\..\addons\ofxFX\src\ofxFXObject.cpp">
       <Filter>addons\ofxFX\src</Filter>
     </ClCompile>
-    <ClCompile Include="src\nvflex_ofx.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\addons\ofxGui\src\ofxBaseGui.cpp">
       <Filter>addons\ofxGui\src</Filter>
     </ClCompile>
@@ -45,6 +42,27 @@
     </ClCompile>
     <ClCompile Include="..\..\..\addons\ofxGui\src\ofxToggle.cpp">
       <Filter>addons\ofxGui\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ofxNvFlex.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxRay-master\src\ofxRay\Base.cpp">
+      <Filter>addons\ofxRay\src\ofxRay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxRay-master\src\ofxRay\Camera.cpp">
+      <Filter>addons\ofxRay\src\ofxRay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxRay-master\src\ofxRay\Plane.cpp">
+      <Filter>addons\ofxRay\src\ofxRay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxRay-master\src\ofxRay\Plane_fitToPoints.cpp">
+      <Filter>addons\ofxRay\src\ofxRay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxRay-master\src\ofxRay\Projector.cpp">
+      <Filter>addons\ofxRay\src\ofxRay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxRay-master\src\ofxRay\Ray.cpp">
+      <Filter>addons\ofxRay\src\ofxRay</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -86,6 +104,15 @@
     </Filter>
     <Filter Include="addons\ofxGui\src">
       <UniqueIdentifier>{de4d360e-7649-4e20-a1ff-4fcfb5a7209e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxRay">
+      <UniqueIdentifier>{1873bf08-7884-461c-aa6f-b6ab0b105fcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxRay\src">
+      <UniqueIdentifier>{713fc601-179c-4f81-ad93-d6b5ea5435e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxRay\src\ofxRay">
+      <UniqueIdentifier>{db6996e3-3606-479c-a9c0-86a1b3aebd96}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -209,9 +236,6 @@
     <ClInclude Include="..\..\..\addons\FleX\include\NvFlexExt.h">
       <Filter>Include</Filter>
     </ClInclude>
-    <ClInclude Include="src\nvflex_ofx.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\addons\ofxGui\src\ofxBaseGui.h">
       <Filter>addons\ofxGui\src</Filter>
     </ClInclude>
@@ -244,6 +268,33 @@
     </ClInclude>
     <ClInclude Include="..\..\..\addons\ofxGui\src\ofxToggle.h">
       <Filter>addons\ofxGui\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ofxNvFlex.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ofxNvFlex_data.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ofApp_util.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxRay-master\src\ofxRay.h">
+      <Filter>addons\ofxRay\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxRay-master\src\ofxRay\Base.h">
+      <Filter>addons\ofxRay\src\ofxRay</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxRay-master\src\ofxRay\Camera.h">
+      <Filter>addons\ofxRay\src\ofxRay</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxRay-master\src\ofxRay\Plane.h">
+      <Filter>addons\ofxRay\src\ofxRay</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxRay-master\src\ofxRay\Projector.h">
+      <Filter>addons\ofxRay\src\ofxRay</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxRay-master\src\ofxRay\Ray.h">
+      <Filter>addons\ofxRay\src\ofxRay</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

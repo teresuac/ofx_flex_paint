@@ -1,9 +1,9 @@
 #pragma once
 
 #include "ofMain.h" 
-#include "nvflex_ofx.h"
+#include "ofxNvFlex.h"
 #include "ofxGui.h"
-#include "of3DGraphics.h"
+#include "ofxRay.h" 
 
 class ofApp : public ofBaseApp{
 
@@ -25,17 +25,17 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 
 		//callback
-		void resetf();
 		void dswitch();
 		void reset_cam();
 		void rand_color();
+		void reset_sim();
 
 		// nflex
 		ofx_nvflex* flex;
 
 		// mouse old
 		float olddx, olddy; 
-
+		float height;
 
 		// GUI
 		ofxFloatSlider cohesion;
@@ -47,7 +47,10 @@ class ofApp : public ofBaseApp{
 		ofxFloatSlider rate;
 		ofxFloatSlider size;
 		ofxFloatSlider momentum ;
+		ofxFloatSlider gravity;
+		ofxFloatSlider stiffness;
 		ofxColorSlider col;
+		ofxToggle drawPP ;
 		ofxLabel shortcuta; 
 		ofxLabel shortcutb;
 		ofxButton reset; 
@@ -58,11 +61,13 @@ class ofApp : public ofBaseApp{
 		// 3D mode
 		bool display_mode;
 		ofMesh mesh;
-		ofMesh meshb;
+		ofMesh mesh_springs;
 		ofEasyCam cam;
 		ofLight Light;
-		//of3dGraphics a;
-
 		ofNode lookAt; 
+
+		int import_soft; 
+		bool keyIsDown[255];
+
 };
 
